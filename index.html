@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap" rel="stylesheet">
+    <title>Text Formatter</title>
+    <style>
+        :root {
+            --background-color: #1a1a1a; /* Dark background */
+            --text-color: #fff; /* White text for contrast */
+            --container-background: #2a2a2a; /* Slightly lighter dark container */
+            --button-background: #0066cc; /* Blue button background */
+            --button-hover: #004d99; /* Darker blue for hover */
+            --border-color: #444; /* Border with dark color */
+        }
+        body {
+            font-family: Georgia, serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: var(--container-background);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.8);
+        }
+		h2 {
+            font-family: "Caprasimo", serif;
+			font-size: 200%;
+		    color: #6EB5BB;
+		    text-align: center;
+		}
+		p {
+		   text-align: center;
+		}
+        textarea {
+            width: calc(100% - 20px);
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            resize: none;
+            box-sizing: border-box;
+            font-family: Georgia, serif;
+            background: #ADDADE;
+            color: #467377;
+        }
+        button {
+            padding: 10px 20px;
+            color: white;
+            background-color: #467377;
+			font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #BFDADF;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--container-background);
+            color: var(--text-color);
+            white-space: pre-wrap;
+            font-family: Georgia, serif;
+        }
+        .copy-btn-container {
+            display: flex;
+            justify-content: flex-end; /* Align the button to the right */
+            margin-top: 10px;
+        }
+        .copy-btn {
+            padding: 10px 20px;
+            background-color: #68ABB1;
+			font-weight: bold;
+            display: none; /* Initially hidden */
+        }
+        .copy-btn:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Text Formatter</h2>
+		<p>Adds a line gap in between all lines.</p>
+        <textarea id="userText" placeholder="Paste your text here..."></textarea>
+        <button onclick="displayText()">Submit</button>
+
+        <div class="copy-btn-container">
+            <button id="copyButton" class="copy-btn" onclick="copyText()">Copy</button>
+        </div>
+
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        function displayText() {
+            const text = document.getElementById('userText').value;
+            const outputDiv = document.getElementById('output');
+            const copyButton = document.getElementById('copyButton');
+
+            if (text.trim()) {
+                // Replace newlines with two newlines to create a gap
+                const formattedText = text.replace(/\n/g, '\n\n');
+                outputDiv.textContent = formattedText;
+
+                // Show the copy button after text is submitted
+                copyButton.style.display = 'inline-block';
+            } else {
+                outputDiv.textContent = "No text submitted.";
+                copyButton.style.display = 'none'; // Hide the copy button if no text
+            }
+        }
+
+        function copyText() {
+            const text = document.getElementById('output').textContent;
+            if (text.trim()) {
+                // Create a temporary textarea element to copy the text
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = text;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempTextArea);
+
+                // Change button text to "Copied!" and then revert after 2 seconds
+                const copyButton = document.getElementById('copyButton');
+                copyButton.textContent = "Copied!";
+                setTimeout(() => {
+                    copyButton.textContent = "Copy";
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
