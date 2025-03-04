@@ -91,6 +91,25 @@
         .copy-btn:disabled {
             background-color: #ccc;
         }
+		
+		.down-button {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			background-color: #467377;
+			color: white;
+			border: none;
+			padding: 10px 15px;
+			border-radius: 50%;
+			font-size: 20px;
+			cursor: pointer;
+			box-shadow: 0 2px 5px rgba(255, 255, 255, 0.8);
+		}
+
+		.down-button:hover {
+			background-color: #BFDADF;
+		}
+
     </style>
 </head>
 <body>
@@ -106,6 +125,8 @@
 
         <div id="output" class="output"></div>
     </div>
+	
+	<button class="down-button" onclick="scrollToBottom()">↓</button>
 
     <script>
         function displayText() {
@@ -145,6 +166,14 @@
                 }, 2000);
             }
         }
+		
+		function scrollToBottom() {
+			window.scrollTo({
+				top: document.body.scrollHeight,
+				behavior: "smooth"
+			});
+		}
+
     </script>
 </body>
 </html>
