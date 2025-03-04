@@ -52,25 +52,18 @@
             resize: none;
             box-sizing: border-box;
             font-family: Georgia, serif;
+			font-size: 16px; /* Prevent zoom-in on mobile */
             background: #ADDADE;
             color: #467377;
-	    font-size: 16px; /* Prevent zoom-in on mobile */
-}
-
         }
         button {
-            font-size: 14px !important;
-	    padding: 10px 20px;
-	    font-weight: bold;
-	    color: white;
-	    background-color: #467377;
-	    border: none;
-	    border-radius: 4px;
-	    cursor: pointer;
-	    -webkit-appearance: none;
-	    -webkit-text-size-adjust: 100%;
-}
-
+            padding: 10px 20px;
+			color: white; /* Ensures text color remains white */
+			background-color: #467377;
+			font-weight: bold;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
         }
         button:hover {
             background-color: #BFDADF;
@@ -91,11 +84,11 @@
             margin-top: 10px;
         }
         .copy-btn {
-            padding: 10px 20px;
-            background-color: #68ABB1;
+			color: white !important; /* Force white text */
+			background-color: #68ABB1;
 			font-weight: bold;
-            display: none; /* Initially hidden */
-        }
+			display: none; /* Initially hidden */
+		}
         .copy-btn:disabled {
             background-color: #ccc;
         }
