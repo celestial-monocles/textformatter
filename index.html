@@ -63,6 +63,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-weight: bold;
         }
         button:hover {
             background-color: #BFDADF;
@@ -107,14 +108,30 @@
         .down-button:hover {
             background-color: #BFDADF;
         }
+        .button-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        #clearButton {
+            background-color: #e74c3c;
+            display: none;
+        }
+        #clearButton:hover {
+            background-color: #c0392b;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Text Formatter</h2>
         <p>Adds a line gap in between all lines.</p>
-        <textarea id="userText" placeholder="Paste your text here..."></textarea>
-        <button onclick="displayText()">Submit</button>
+        <textarea id="userText" placeholder="Paste your text here..." oninput="handleInput()"></textarea>
+        <div class="button-row">
+            <button onclick="displayText()">Submit</button>
+            <button id="clearButton" onclick="clearInput()">Clear Input</button>
+        </div>
 
         <div class="copy-btn-container">
             <button id="copyButton" class="copy-btn" onclick="copyText()">Copy</button>
@@ -174,6 +191,30 @@
                 top: document.body.scrollHeight,
                 behavior: "smooth",
             });
+        }
+
+        function handleInput() {
+            const textArea = document.getElementById('userText');
+            const clearButton = document.getElementById('clearButton');
+            const copyButton = document.getElementById('copyButton');
+            if (textArea.value.length > 0) {
+                clearButton.style.display = 'inline-block';
+            } else {
+                clearButton.style.display = 'none';
+                copyButton.style.display = 'none';
+                document.getElementById('output').textContent = '';
+            }
+        }
+
+        function clearInput() {
+            const textArea = document.getElementById('userText');
+            const clearButton = document.getElementById('clearButton');
+            const copyButton = document.getElementById('copyButton');
+            textArea.value = '';
+            clearButton.style.display = 'none';
+            copyButton.style.display = 'none';
+            document.getElementById('output').textContent = '';
+            textArea.focus();
         }
     </script>
 </body>
